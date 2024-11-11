@@ -483,8 +483,14 @@ function getFloatOnString(str) {
  * '1.234', 2           => 1
  * '10', 8              => 8
  */
-function getIntegerOnString(/* str, base */) {
-  throw new Error('Not implemented');
+function getIntegerOnString(str, base) {
+  const parsed = parseInt(str, base);
+  if (Number.isNaN(parsed)) {
+    return NaN;
+  }
+  const strWithoutDot = str.split('.')[0];
+  const parsedString = parsed.toString(base);
+  return parsedString === strWithoutDot ? parsed : NaN;
 }
 
 /**
@@ -638,8 +644,11 @@ function getHypotenuse(a, b) {
  * 10 => 5
  * 15 => 8
  */
-function getCountOfOddNumbers(/* number */) {
-  throw new Error('Not implemented');
+function getCountOfOddNumbers(number) {
+  if (number < 0) {
+    return 0;
+  }
+  return Math.floor((number + 1) / 2);
 }
 
 module.exports = {
